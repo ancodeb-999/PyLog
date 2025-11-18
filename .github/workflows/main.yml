@@ -27,7 +27,7 @@ jobs:
 
       - name: Build binary
         run: |
-          pyinstaller --onefile main.py
+          pyinstaller --onefile scr/main.py
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
