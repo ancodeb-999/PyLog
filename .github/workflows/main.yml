@@ -3,7 +3,7 @@ name: Build Executables
 on:
   push:
     tags:
-      - 'v*'   # 你发布 tag v1.0 就会自动构建 Release
+      - 'v*'   #  Release
 
 jobs:
   build:
