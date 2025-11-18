@@ -1,37 +1,12 @@
-name: Build Multi-platform Executables
-
-on:
-  push:
-    tags:
-      - 'v*'   #Automatically build when creating tags for v1.0, v2.0, etc.
 jobs:
-  build:
-    name: Build for ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
-
+  pyinstaller-build:
+    runs-on: <windows-latest>
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Create Executable
+        uses: sayyid5416/pyinstaller@v1
         with:
-          python-version: "3.10"
-
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install pyinstaller
-
-      - name: Build binary
-        run: |
-          pyinstaller --onefile scr/main.py
-
-      - name: Upload Release Asset
-        uses: softprops/action-gh-release@v1
-        with:
-          files: dist/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          python_ver: '3.6'
+          spec: 'src/main.py'
+          requirements: 'requirements.txt'
+          upload_exe_with_name: 'Pylog'
+          options: --onefile, --name "My App", --windowed, 
