@@ -1,9 +1,10 @@
 name: Build Executables
-
 on:
   push:
-    tags:
-      - 'v*'   #  Release
+    branches:
+      - main
+  workflow_dispatch:
+
 
 jobs:
   build:
