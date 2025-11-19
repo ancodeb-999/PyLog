@@ -22,13 +22,13 @@ jobs:
         run: pip install pyinstaller
 
       - name: Build EXE
-        run: pyinstaller --onefile src/main.py
+        run: pyinstaller --onefile --name PyLog scr/main.py
 
-      - name: Upload artifact
+      - name: Upload Windows EXE
         uses: actions/upload-artifact@v4
         with:
-          name: app-windows
-          path: dist/*
+          name: PyLog-Windows
+          path: dist/PyLog.exe   # exe 
 
 
   build-linux:
@@ -46,13 +46,13 @@ jobs:
         run: pip install pyinstaller
 
       - name: Build EXE
-        run: pyinstaller --onefile src/main.py
+        run: pyinstaller --onefile --name PyLog scr/main.py
 
-      - name: Upload artifact
+      - name: Upload Linux EXE
         uses: actions/upload-artifact@v4
         with:
-          name: app-linux
-          path: dist/*
+          name: PyLog-Linux
+          path: dist/PyLog   # Linux 
 
 
   build-macos:
@@ -70,10 +70,10 @@ jobs:
         run: pip install pyinstaller
 
       - name: Build EXE
-        run: pyinstaller --onefile src/main.py
+        run: pyinstaller --onefile --name PyLog scr/main.py
 
-      - name: Upload artifact
+      - name: Upload macOS EXE
         uses: actions/upload-artifact@v4
         with:
-          name: app-macos
-          path: dist/*
+          name: PyLog-macOS
+          path: dist/PyLog   # macOS
