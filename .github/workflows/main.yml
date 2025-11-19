@@ -28,8 +28,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: PyLog-Windows
-          path: dist/PyLog.exe   # exe 
-
+          path: dist/PyLog.exe
 
   build-linux:
     runs-on: ubuntu-latest
@@ -52,8 +51,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: PyLog-Linux
-          path: dist/PyLog   # Linux 
-
+          path: dist/PyLog
 
   build-macos:
     runs-on: macos-latest
@@ -76,4 +74,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: PyLog-macOS
-          path: dist/PyLog   # macOS
+          path: dist/PyLog
