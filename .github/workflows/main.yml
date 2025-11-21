@@ -2,7 +2,8 @@ name: Build Executables
 
 on:
   push:
-    branches: [main]
+    tags:
+      - 'v*'       # tag
   workflow_dispatch:
 
 jobs:
@@ -10,68 +11,65 @@ jobs:
   build-windows:
     runs-on: windows-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
-        run: pip install pyinstaller
+      - run: pip install pyinstaller
 
-      - name: Build EXE
-        run: pyinstaller --onefile --name PyLog src/main.py
+      - run: pyinstaller --onefile --name PyLog src/main.py
 
-      - name: Upload Windows EXE
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: PyLog-Windows
-          path: dist/PyLog.exe
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: dist/PyLog.exe
+          asset_name: PyLog-Windows.exe
+          asset_content_type: application/octet-stream
 
   build-linux:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
-        run: pip install pyinstaller
+      - run: pip install pyinstaller
 
-      - name: Build EXE
-        run: pyinstaller --onefile --name PyLog src/main.py
+      - run: pyinstaller --onefile --name PyLog src/main.py
 
-      - name: Upload Linux EXE
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: PyLog-Linux
-          path: dist/PyLog
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: dist/PyLog
+          asset_name: PyLog-Linux
+          asset_content_type: application/octet-stream
 
   build-macos:
     runs-on: macos-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
-        run: pip install pyinstaller
+      - run: pip install pyinstaller
 
-      - name: Build EXE
-        run: pyinstaller --onefile --name PyLog src/main.py
+      - run: pyinstaller --onefile --name PyLog src/main.py
 
-      - name: Upload macOS EXE
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: PyLog-macOS
-          path: dist/PyLog
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: dist/PyLog
+          asset_name: PyLog-macOS
+          asset_content_type: application/octet-stream
