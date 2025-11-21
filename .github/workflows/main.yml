@@ -33,6 +33,7 @@ jobs:
           python-version: '3.10'
 
       - run: pip install pyinstaller
+      - run: pip install psutil
       - run: pyinstaller --onefile --name PyLog src/main.py
 
       - name: Upload Windows
@@ -55,6 +56,7 @@ jobs:
           python-version: '3.10'
 
       - run: pip install pyinstaller
+      - run: pip install psutil
       - run: pyinstaller --onefile --name PyLog src/main.py
 
       - name: Upload Linux
@@ -77,6 +79,7 @@ jobs:
           python-version: '3.10'
 
       - run: pip install pyinstaller
+      - run: pip install psutil
       - run: pyinstaller --onefile --name PyLog src/main.py
 
       - name: Upload macOS
